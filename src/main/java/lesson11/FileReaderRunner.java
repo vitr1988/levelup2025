@@ -1,6 +1,8 @@
 package lesson11;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
@@ -26,6 +28,10 @@ public class FileReaderRunner {
             System.out.println("Вы ввели число %d".formatted(value));
 
         }
+
+//        ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream();
+//        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//        byteArrayOutputStream.writeTo();
 //        catch (FileNotFoundException fe) {
 //            System.out.printf("Файл %s не найден", SRC_RESOURCES_TEST_TXT);
 //        } catch (IOException e) {
