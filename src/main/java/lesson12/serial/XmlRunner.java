@@ -1,6 +1,9 @@
 package lesson12.serial;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.math.BigDecimal;
 
@@ -12,10 +15,16 @@ public class XmlRunner {
         );
 //        XmlMapper xmlMapper = new XmlMapper();
         ObjectMapper jsonMapper = new ObjectMapper();
+        jsonMapper.enable(SerializationFeature.INDENT_OUTPUT);
 //        xmlMapper.registerModule(new JavaTimeModule());
+//        xmlMapper.enable(SerializationFeature.INDENT_OUTPUT);
 //        XMLStreamWriter xmlStreamWriter = XMLOutputFactory.newInstance().createXMLStreamWriter(new FileWriter("src/resources/text.xml"));
 //        xmlMapper.writeValue(xmlStreamWriter, employee);
-//        System.out.println(xmlMapper.writeValueAsString(new Account()));
-        System.out.println(jsonMapper.writeValueAsString(employee));
+        System.out.println(jsonMapper
+//                .writerWithDefaultPrettyPrinter()
+                .writeValueAsString(employee));
+//        System.out.println(jsonMapper.writeValueAsString(employee));
+//        xmlStreamWriter.flush();
+//        xmlStreamWriter.close();
     }
 }
