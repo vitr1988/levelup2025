@@ -11,7 +11,9 @@ public class PrintThread extends Thread implements Runnable {
     @Override
     @SneakyThrows
     public void run() {
-        Thread.sleep(5000);
-        System.out.println("Status %s, To: World (%s)".formatted(status, Thread.currentThread().threadId()));
+        while (!isInterrupted()) {
+            Thread.sleep(5000);
+            System.out.println("Status %s, To: World (%s)".formatted(status, Thread.currentThread().threadId()));
+        }
     }
 }
