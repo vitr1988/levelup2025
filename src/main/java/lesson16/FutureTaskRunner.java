@@ -18,6 +18,9 @@ public class FutureTaskRunner {
             @Override
             public Void call() throws Exception {
                 Thread.sleep(10000);
+//                for (;;) {
+//
+//                }
 //                wait(1000);
 //                return 0;
                 return null;
@@ -25,17 +28,19 @@ public class FutureTaskRunner {
         };
 
         FutureTask<Void> futureTask = new FutureTask<>(callable);
-        futureTask.run();
+        new Thread(futureTask).start();
+//        futureTask.run();
 
 //        Integer result = futureTask.get();
         Object result = "test";
-        while(!futureTask.isDone()) {
-            System.out.println("задача продолжает свое выполнение");
-            Thread.sleep(100);
-        }
+//        while(!futureTask.isDone()) {
+//            System.out.println("задача продолжает свое выполнение");
+//            Thread.sleep(100);
+//        }
         try {
             result = futureTask.get(1, TimeUnit.SECONDS);
         } catch (Exception e) {
+            futureTask.cancel(true);
             result = "Exception";
         }
 

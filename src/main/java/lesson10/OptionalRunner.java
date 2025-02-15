@@ -1,8 +1,10 @@
 package lesson10;
 
+import lesson11.IntHolder;
 import lesson4.Account;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -24,10 +26,14 @@ public class OptionalRunner {
 //        s1 = "";
 //        final String test2 = s1;
         String word = "Hello, World";
+        word += "";
+        String str = word;
+        AtomicInteger intHolder = new AtomicInteger(10);
         Optional<Optional<String>> optionalOfOptional = Optional.of(Optional.ofNullable(word));
         Optional<String> value = optionalOfOptional.flatMap(Function.identity());
         value.ifPresent(it -> {
             System.out.println(it);
+            System.out.println(intHolder.getAndIncrement());
             it = it + " again " + s1;
             System.out.println(it);
         });
