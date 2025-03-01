@@ -23,5 +23,7 @@ public class EmployeeRunner {
 
         dao.delete(employee);
         System.out.println(dao.findAll().size());
+
+        System.out.println("Max id : " + dao.getMaxId());
     }
 }

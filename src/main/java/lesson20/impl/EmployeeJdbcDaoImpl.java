@@ -98,4 +98,27 @@ public class EmployeeJdbcDaoImpl implements EmployeeDao {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void deleteById(Integer id) {
+        //todo: написать код для удаления через JDBC
+    }
+
+    @Override
+    public int getMaxId() {
+        //language=SQL
+        String sql = "select (max(id) + 1) as maxId from employees";
+        try (PreparedStatement preparedStatement = DbHelper.createPreparedStatement(sql)) {
+            ResultSet resultSet = preparedStatement.executeQuery();
+            List<Employee> employees = new ArrayList<>();
+            resultSet.next();
+            int result = resultSet.getInt(1);
+            if (resultSet.wasNull()) {
+                result = 1;
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -14,4 +14,8 @@ public interface EmployeeDao {
     void save(Employee employee);
 
     void delete(Employee employee);
+
+    void deleteById(Integer id);
+
+    int getMaxId();
 }
