@@ -2,6 +2,7 @@ package lesson20;
 
 import lesson19.Employee;
 import lesson20.impl.EmployeeJdbcDaoImpl;
+import lesson20.model.EmployeeType;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class EmployeeRunner {
 
         System.out.println(dao.findById(1));
 
-        Employee employee = new Employee(31, "New Employee!!!!!!!!", 100);
+        Employee employee = new Employee(31, "New Employee!!!!!!!!", 100, EmployeeType.STAFF);
         dao.save(employee);
 
         System.out.println(dao.findAll().size());

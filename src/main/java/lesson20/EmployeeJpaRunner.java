@@ -2,6 +2,7 @@ package lesson20;
 
 import lesson19.Employee;
 import lesson20.impl.EmployeeJpaDaoImpl;
+import lesson20.model.EmployeeType;
 
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class EmployeeJpaRunner {
 
         int maxId = dao.getMaxId();
         System.out.println("Max id:" + maxId);
-        Employee employee = new Employee("Test Test XXX", 1);
+        Employee employee = new Employee("Test Test XXX", 1, EmployeeType.NON_STAFF);
         dao.save(employee);
 
         dao.findById(7).ifPresent(dao::delete);

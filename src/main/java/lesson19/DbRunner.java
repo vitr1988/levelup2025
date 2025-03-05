@@ -1,6 +1,7 @@
 package lesson19;
 
 import lesson19.util.DbHelper;
+import lesson20.model.EmployeeType;
 import lombok.SneakyThrows;
 
 import java.io.IOException;
@@ -49,7 +50,8 @@ public class DbRunner {
                 String employeeName = resultSet.getString("name");
                 String bossName = resultSet.getString("boss_name");
                 Integer positionId = DbHelper.getInteger(resultSet, "position_id");
-                employees.add(new Employee(employeeId, employeeName, bossName, positionId));
+                EmployeeType type = EmployeeType.valueOf(resultSet.getString("type"));
+                employees.add(new Employee(employeeId, employeeName, bossName, type, positionId));
             }
         }
         System.out.println(employees);
@@ -84,7 +86,8 @@ public class DbRunner {
                 String employeeName = resultSet.getString("name");
                 String bossName = resultSet.getString("boss_name");
                 Integer positionId = DbHelper.getInteger(resultSet, "position_id");
-                filteredEmployees.add(new Employee(employeeId, employeeName, bossName, positionId));
+                EmployeeType type = EmployeeType.valueOf(resultSet.getString("type"));
+                filteredEmployees.add(new Employee(employeeId, employeeName, bossName, type, positionId));
             }
         }
         System.out.println(filteredEmployees);

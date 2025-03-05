@@ -7,6 +7,8 @@ import lesson20.HibernateHelper;
 import java.util.List;
 import java.util.Optional;
 
+import static lesson20.model.Employee.RESULT_SET_MAPPING;
+
 public class EmployeeJpaDaoImpl implements EmployeeDao {
 
     @Override
@@ -18,7 +20,7 @@ public class EmployeeJpaDaoImpl implements EmployeeDao {
 //            return result;
 //        }
         return HibernateHelper.runInTransaction(entityManager -> {
-            return entityManager.createQuery("select employee from Employee employee").getResultList();
+            return entityManager.createQuery("select employee from Emp employee").getResultList();
         });
     }
 
@@ -26,11 +28,11 @@ public class EmployeeJpaDaoImpl implements EmployeeDao {
     public Optional<Employee> findById(Integer id) {
 //        try (Session session = HibernateHelper.getSession()) {
 //            session.beginTransaction();
-////            NativeQuery<lesson21.projection.Employee> nativeQuery = session.createNativeQuery(
-////                    "select id, name, position_id as positionId from employees employee " +
-////                    "where employee.id = :id", lesson21.projection.Employee.class);
-////            nativeQuery.setParameter("id", id);
-////            Optional<lesson21.projection.Employee> result = nativeQuery.getResultList().stream().findFirst();
+//            NativeQuery<Employee> nativeQuery = session.createNativeQuery(
+//                    "select id, name, position_id as positionId from employees employee " +
+//                            "where employee.id = :id", "EmployeeResultSet");
+//            nativeQuery.setParameter("id", id);
+//            return nativeQuery.getResultList().stream().findFirst();
 ////            Query<lesson20.model.Employee> selectEmployeeFromEmployeeEmployee = session.createQuery(
 ////                    "select employee from Employee employee " +
 ////                    "where employee.id = :id", lesson20.model.Employee.class);
@@ -41,7 +43,7 @@ public class EmployeeJpaDaoImpl implements EmployeeDao {
 ////            lesson20.model.Employee singleResult = selectEmployeeFromEmployeeEmployee.getSingleResult();
 //            session.getTransaction().commit();
 ////            return result.map(it -> new Employee(it.getId(), it.getName(), it.getPositionId()));
-//            return Optional.ofNullable(it).map(that -> new Employee(that.getId(), that.getName(), that.getPositionId()));
+//            return result.map(that -> new Employee(that.getId(), that.getName(), that.getPositionId()));
 ////            return result.stream().findFirst()
 ////                    .map(it -> new Employee(it.getId(), it.getName(), it.getPositionId()));//result.stream().findFirst();
 //        }
@@ -50,8 +52,15 @@ public class EmployeeJpaDaoImpl implements EmployeeDao {
 //        }
 
         return HibernateHelper.runInTransaction(entityManager -> {
-            return Optional.ofNullable(entityManager.find(lesson20.model.Employee.class, id))
-                    .map(that -> new Employee(that.getId(), that.getName(), that.getPositionId()));
+//            return Optional.ofNullable(entityManager.find(lesson20.model.Employee.class, id))
+//                    .map(that -> new Employee(that.getId(), that.getName(), that.getPositionId()));
+            return entityManager.createNativeQuery(
+                            "select id, name, position_id as positionId from employees employee " +
+                                    "where employee.id = :id", RESULT_SET_MAPPING)
+                    .setParameter("id", id)
+                    .getResultList()
+                    .stream()
+                    .findFirst();
         });
     }
 
@@ -100,7 +109,7 @@ public class EmployeeJpaDaoImpl implements EmployeeDao {
         return HibernateHelper.runInTransaction(session -> {
             return session.createQuery("""
                             select max(employee.id) + 1
-                            from Employee employee
+                            from Emp employee
                             """, Integer.class).getResultList()
                     .stream()
                     .findFirst()
