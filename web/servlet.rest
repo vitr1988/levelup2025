@@ -1,0 +1,11 @@
+####
+
+GET http://localhost:8081/web/test
+
+####
+
+POST http://localhost:8081/web/hello
+Content-Type: application/x-www-form-urlencoded
+
+name=Vitaly
+
