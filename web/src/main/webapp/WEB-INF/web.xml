@@ -17,8 +17,12 @@
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
 
+    <session-config>
+        <session-timeout>15</session-timeout>
+    </session-config>
+
     <welcome-file-list>
-        <welcome-file>public/index.html</welcome-file>
+        <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
 </web-app>

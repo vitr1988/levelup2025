@@ -1,10 +1,9 @@
 package lesson23;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,10 +14,11 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Objects;
 
-@WebServlet(urlPatterns = "/hello", loadOnStartup = 1)
+//@WebServlet(urlPatterns = "/hello", loadOnStartup = 1)
 public class HelloWorldServlet extends HttpServlet {
 
     private Integer value = 0;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Override
     public void init(ServletConfig config) throws ServletException {
